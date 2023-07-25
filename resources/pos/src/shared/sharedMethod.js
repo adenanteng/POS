@@ -93,13 +93,13 @@ export const ProtectedRoute = (props) => {
 
 export const formatAmount = (num) => {
     if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'Miliar';
     }
     if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'Juta';
     }
     if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'Ribu';
     }
     return num;
 }
@@ -109,13 +109,13 @@ export const currencySymbolHendling = (isRightside, currency, value, is_forment)
         if (is_forment) {
             return formatAmount(value) + ' ' + currency
         } else {
-            return parseFloat(value).toFixed(2) + ' ' + currency
+            return parseFloat(value).toFixed(0) + ' ' + currency
         }
     } else {
         if (is_forment) {
             return currency + ' ' + formatAmount(value)
         } else {
-            return currency + ' ' + parseFloat(value).toFixed(2)
+            return currency + ' ' + parseFloat(value).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
         }
     }
 }
